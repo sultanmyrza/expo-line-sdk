@@ -1,0 +1,17 @@
+{
+  "platforms": [
+    "apple",
+    "android",
+    "web"
+  ],
+  "apple": {
+    "modules": [
+      "ExpoLineSdkModule"
+    ]
+  },
+  "android": {
+    "modules": [
+      "xyz.wodeapp.expo.linesdk.ExpoLineSdkModule"
+    ]
+  }
+}
