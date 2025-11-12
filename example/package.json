@@ -6,10 +6,16 @@
     "start": "expo start",
     "android": "expo run:android",
     "ios": "expo run:ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "eas:build:development:ios": "eas build --local -e development -p ios --output ./builds/build-development-$(date +%s).ipa",
+    "eas:build:development:android": "eas build --local -e development -p android --output ./builds/build-development-$(date +%s).apk",
+    "eas:build:production:ios": "eas build --local -e production -p ios --output ./builds/build-production-$(date +%s).ipa",
+    "eas:build:production:android": "eas build --local -e production -p android --output ./builds/build-production-$(date +%s).aab",
+    "eas:clean:local:artifacts": "rm -f builds/build-*.{apk,aab,ipa}"
   },
   "dependencies": {
     "expo": "~54.0.23",
+    "expo-dev-client": "~6.0.17",
     "react": "19.1.0",
     "react-native": "0.81.5"
   },

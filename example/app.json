@@ -14,7 +14,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "xyz.wodeapp.expo.linesdk.example"
+      "bundleIdentifier": "xyz.wodeapp.expo.linesdk.example",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -27,6 +30,11 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "fdc9894f-dc8b-47d4-a8a3-3889206f78c5"
+      }
     }
   }
 }
