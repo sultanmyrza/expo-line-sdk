@@ -37,12 +37,49 @@ export default function App() {
 
   const apis: APIItem[] = [
     {
+      name: 'Setup',
+      run: async () => {
+        try {
+          await ExpoLineSdk.setup({ channelId: '2006633855' });
+          setState({ success: true }, null);
+        } catch (e: any) {
+          console.log(e);
+          setState(null, e);
+        }
+      },
+    },
+    {
+      name: 'Login',
+      run: async () => {
+        try {
+          const result = await ExpoLineSdk.login({ scopes: ['profile', 'openid', 'email'] });
+          setState(result, null);
+        } catch (e: any) {
+          console.log(e);
+          setState(null, e);
+        }
+      },
+    },
+    {
+      name: 'Logout',
+      run: async () => {
+        try {
+          await ExpoLineSdk.logout();
+          setState({ success: true }, null);
+        } catch (e: any) {
+          console.log(e);
+          setState(null, e);
+        }
+      },
+    },
+    {
       name: 'Get Profile',
       run: async () => {
         try {
           const result = await ExpoLineSdk.getProfile();
           setState(result, null);
         } catch (e: any) {
+          console.log(e);
           setState(null, e);
         }
       },
@@ -54,6 +91,7 @@ export default function App() {
           const result = await ExpoLineSdk.getCurrentAccessToken();
           setState(result, null);
         } catch (e: any) {
+          console.log(e);
           setState(null, e);
         }
       },
@@ -65,6 +103,7 @@ export default function App() {
           const result = await ExpoLineSdk.refreshToken();
           setState(result, null);
         } catch (e: any) {
+          console.log(e);
           setState(null, e);
         }
       },
@@ -76,6 +115,7 @@ export default function App() {
           const result = await ExpoLineSdk.verifyAccessToken();
           setState(result, null);
         } catch (e: any) {
+          console.log(e);
           setState(null, e);
         }
       },
@@ -87,6 +127,7 @@ export default function App() {
           const result = await ExpoLineSdk.getBotFriendshipStatus();
           setState(result, null);
         } catch (e: any) {
+          console.log(e);
           setState(null, e);
         }
       },
