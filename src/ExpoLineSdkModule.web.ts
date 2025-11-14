@@ -9,10 +9,11 @@ import {
   AccessToken,
   AccessTokenVerifyResult,
   BotFriendshipStatus,
+  SetupParams,
 } from './ExpoLineSdk.types';
 
 class ExpoLineSdkModule extends NativeModule<ExpoLineSdkModuleEvents> {
-  async setup(channelId: string, universalLink?: string): Promise<void> {
+  async setup(params: SetupParams): Promise<void> {
     throw new Error('LINE SDK is not supported on web platform');
   }
 

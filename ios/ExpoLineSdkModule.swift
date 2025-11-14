@@ -12,11 +12,7 @@ public class ExpoLineSdkModule: Module {
     // The module will be accessible from `requireNativeModule('ExpoLineSdk')` in JavaScript.
     Name("ExpoLineSdk")
     
-    AsyncFunction("setup") { (channelId: String, universalLink: String?, result: Promise) in
-      // Expo handles automatic validation and type-safety; however, to maintain Flutter parity
-      // for cross-framework porting, we convert validated Expo parameters to dictionary for internal API consistency
-      let arguments: [String: Any] = [ "channelId": channelId, "universalLink": universalLink].compactMapValues { $0 }
-
+    AsyncFunction("setup") { (arguments: [String: Any]?, result: Promise) in
       guard let method = LineChannelMethod(rawValue: "setup") else {
         result.reject(ExpoError.methodNotImplemented)
         return
@@ -24,17 +20,7 @@ public class ExpoLineSdkModule: Module {
       method.call(arguments: arguments, result: result)
     }
 
-    AsyncFunction("login") { (params: LoginParams?, result: Promise) in
-      // Convert validated Expo parameters to dictionary for internal API consistency
-      // Expo handles automatic validation and type-safety; we maintain Flutter parity for cross-framework porting
-      let arguments: [String: Any] = [
-        "scopes": params?.scopes,
-        "onlyWebLogin": params?.option?.onlyWebLogin,
-        "botPrompt": params?.option?.botPrompt,
-        "requestCode": params?.option?.requestCode,
-        "idTokenNonce": params?.option?.idTokenNonce
-      ].compactMapValues { $0 }
-
+    AsyncFunction("login") { (arguments: [String:Any]?, result: Promise) in
       guard let method = LineChannelMethod(rawValue: "login") else {
         result.reject(ExpoError.methodNotImplemented)
         return

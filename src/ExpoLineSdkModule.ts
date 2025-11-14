@@ -1,4 +1,4 @@
-import { NativeModule, requireNativeModule } from 'expo';
+import { NativeModule, requireNativeModule } from "expo";
 
 import {
   ExpoLineSdkModuleEvents,
@@ -9,14 +9,15 @@ import {
   AccessToken,
   AccessTokenVerifyResult,
   BotFriendshipStatus,
-} from './ExpoLineSdk.types';
+  SetupParams,
+} from "./ExpoLineSdk.types";
 
 declare class ExpoLineSdkModule extends NativeModule<ExpoLineSdkModuleEvents> {
   /**
    * Sets up the SDK with a channelId and optional universalLink.
    * This method should be called once and only once, before any other methods.
    */
-  setup(channelId: string, universalLink?: string): Promise<void>;
+  setup(params: SetupParams): Promise<void>;
 
   /**
    * Logs the user into LINE with the specified scopes and option.
@@ -60,4 +61,4 @@ declare class ExpoLineSdkModule extends NativeModule<ExpoLineSdkModuleEvents> {
 }
 
 // This call loads the native module object from the JSI.
-export default requireNativeModule<ExpoLineSdkModule>('ExpoLineSdk');
+export default requireNativeModule<ExpoLineSdkModule>("ExpoLineSdk");
