@@ -1,5 +1,7 @@
 import ExpoModulesCore
 
+import LineSDK
+
 public class ExpoLineSdkModule: Module {
   // Each module class must implement the definition function. The definition consists of components
   // that describes the module's functionality and behavior.
@@ -9,6 +11,28 @@ public class ExpoLineSdkModule: Module {
     // Can be inferred from module's class name, but it's recommended to set it explicitly for clarity.
     // The module will be accessible from `requireNativeModule('ExpoLineSdk')` in JavaScript.
     Name("ExpoLineSdk")
+      
+      AsyncFunction("setup") { (arguments: [String: Any]?, result: Promise) in
+          guard !LoginManager.shared.isSetupFinished else {
+              result.resolve(nil)
+              return
+          }
+          
+          guard let args = arguments else {
+              result.reject(ExpoError.nilArgument)
+              return
+          }
+          
+          guard let channelId = args["channelId"] as? String else {
+              result.reject(ExpoError.failedArgumentField("channelId", type: String.self))
+              return
+          }
+          
+          let universalLinkURL = (args["universalLink"] as? String)
+              .map { URL(string: $0) } ?? nil
+          LoginManager.shared.setup(channelID: channelId, universalLinkURL: universalLinkURL)
+          result.resolve(nil)
+      }
 
     // Defines constant property on the module.
     Constant("PI") {
@@ -44,5 +68,46 @@ public class ExpoLineSdkModule: Module {
 
       Events("onLoad")
     }
+  }
+}
+
+// MARK: - Error bridging
+
+public struct ExpoError: Error {
+  public let code: String
+  public let message: String?
+  public let details: Any?
+
+  public init(code: String, message: String?, details: Any?) {
+    self.code = code
+    self.message = message
+    self.details = details
+  }
+}
+
+extension ExpoError {
+  static let nilArgument = ExpoError(
+    code: "argument.nil",
+    message: "Expect an argument when invoking function, but it is nil.",
+    details: nil
+  )
+
+  static func failedArgumentField<T>(_ fieldName: String, type: T.Type) -> ExpoError {
+    return .init(
+      code: "argument.failedField",
+      message: "Expect a `\(fieldName)` field with type <\(type)> in the argument, " +
+               "but it is missing or type not matched.",
+      details: fieldName
+    )
+  }
+}
+
+extension LineSDKError {
+  var expoError: ExpoError {
+    return ExpoError(
+      code: String(errorCode),
+      message: errorDescription,
+      details: errorUserInfo
+    )
   }
 }
