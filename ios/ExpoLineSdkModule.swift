@@ -198,7 +198,7 @@ extension LineChannelMethod {
       in: nil,
       parameters: parameters) { r in
         switch r {
-        case .success(let value): result.resolve(value)
+        case .success(let value): result.resolve(value.json)
         case .failure(let error): result.reject(error.expoError)
         }
       }
@@ -251,6 +251,19 @@ extension LineChannelMethod {
   
   func currentAccessToken(arguments: [String: Any]?, result: Promise) {
     result.resolve(AccessTokenStore.shared.current)
+  }
+}
+
+private let encoder: JSONEncoder = {
+    let encoder = JSONEncoder()
+    encoder.dateEncodingStrategy = .secondsSince1970
+    return encoder
+}()
+
+extension Encodable {
+  var json: String {
+    let data = try! encoder.encode(self)
+    return String(data: data, encoding: .utf8)!
   }
 }
 
