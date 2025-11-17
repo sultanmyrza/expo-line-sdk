@@ -55,7 +55,6 @@ export default function App() {
           const result = await ExpoLineSdk.instance.login({
             scopes: ['profile', 'openid', 'email'],
           });
-          console.log(result);
           setState(result, null);
         } catch (e: any) {
           console.log(e);
