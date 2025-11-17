@@ -258,7 +258,7 @@ extension LineChannelMethod {
   func getProfile(arguments: [String: Any]?, result: Promise) {
     API.getProfile { r in
       switch r {
-      case .success(let value): result.resolve(value)
+      case .success(let value): result.resolve(value.json)
       case .failure(let error): result.reject(error.expoError)
       }
     }
@@ -267,7 +267,7 @@ extension LineChannelMethod {
   func refreshToken(arguments: [String: Any]?, result: Promise) {
     API.Auth.refreshAccessToken { r in
       switch r {
-      case .success(let value): result.resolve(value)
+      case .success(let value): result.resolve(value.json)
       case .failure(let error): result.reject(error.expoError)
       }
     }
@@ -276,7 +276,7 @@ extension LineChannelMethod {
   func verifyAccessToken(arguments: [String: Any]?, result: Promise) {
     API.Auth.verifyAccessToken { r in
       switch r {
-      case .success(let value): result.resolve(value)
+      case .success(let value): result.resolve(value.json)
       case .failure(let error): result.reject(error.expoError)
       }
     }
@@ -285,14 +285,14 @@ extension LineChannelMethod {
   func getBotFriendshipStatus(arguments: [String: Any]?, result: Promise) {
     API.getBotFriendshipStatus { r in
       switch r {
-      case .success(let value): result.resolve(value)
+      case .success(let value): result.resolve(value.json)
       case .failure(let error): result.reject(error.expoError)
       }
     }
   }
   
   func currentAccessToken(arguments: [String: Any]?, result: Promise) {
-    result.resolve(AccessTokenStore.shared.current)
+    result.resolve(AccessTokenStore.shared.current?.json)
   }
 }
 
