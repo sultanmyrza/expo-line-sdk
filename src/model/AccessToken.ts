@@ -36,7 +36,7 @@
  * framework request methods.
  *
  * Don't try to create an access token yourself. You can get the stored access token with
- * LineSDK.getCurrentAccessToken().
+ * LineSDK.currentAccessToken().
  */
 export class AccessToken {
   private _data: Record<string, any>;

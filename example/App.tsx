@@ -90,7 +90,7 @@ export default function App() {
       name: 'Get Current AccessToken',
       run: async () => {
         try {
-          const result = await ExpoLineSdk.instance.getCurrentAccessToken();
+          const result = await ExpoLineSdk.instance.currentAccessToken();
           setState(result, null);
         } catch (e: any) {
           console.log(e);

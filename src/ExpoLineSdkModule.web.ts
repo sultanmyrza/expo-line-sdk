@@ -25,7 +25,7 @@ class ExpoLineSdkModule extends NativeModule<ExpoLineSdkModuleEvents> {
     throw new Error('LINE SDK is not supported on web platform');
   }
 
-  async getCurrentAccessToken(): Promise<StoredAccessToken | null> {
+  async currentAccessToken(): Promise<StoredAccessToken | null> {
     throw new Error('LINE SDK is not supported on web platform');
   }
 

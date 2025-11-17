@@ -131,8 +131,8 @@ class ExpoLineSDK {
    * A valid [StoredAccessToken] object doesn't necessarily mean the access token itself is valid.
    * It may have expired or been revoked by the user from another device or LINE client.
    */
-  async getCurrentAccessToken(): Promise<StoredAccessToken | null> {
-    const result = await ExpoLineSdkModule.getCurrentAccessToken();
+  async currentAccessToken(): Promise<StoredAccessToken | null> {
+    const result = await ExpoLineSdkModule.currentAccessToken();
     if (result == null) return null;
     return new StoredAccessToken(this._decodeJson(result));
   }
@@ -153,7 +153,7 @@ class ExpoLineSDK {
    *
    * If the token refresh process finishes successfully, the refreshed access token will be
    * automatically stored in the user's device. You can wait for the result of this method or get
-   * the refreshed token with [getCurrentAccessToken()].
+   * the refreshed token with [currentAccessToken()].
    *
    * You don't need to refresh the access token manually. Any API call will attempt to refresh the
    * access token when necessary.
