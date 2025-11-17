@@ -115,7 +115,7 @@ public class ExpoLineSdkModule: Module {
 
 extension LineSDKError {
   var expoError: ExpoError {
-    return ExpoError(code: String(errorCode),message: errorDescription, details: errorUserInfo)
+    return ExpoError(code: String(errorCode), message: errorDescription, details: errorUserInfo.description)
   }
 }
 
