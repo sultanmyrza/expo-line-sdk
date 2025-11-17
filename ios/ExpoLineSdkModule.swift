@@ -19,7 +19,7 @@ public class ExpoLineSdkModule: Module {
       }
       method.call(arguments: arguments, result: result)
     }
-
+    
     AsyncFunction("login") { (arguments: [String:Any]?, result: Promise) in
       guard let method = LineChannelMethod(rawValue: "login") else {
         result.reject(ExpoError.methodNotImplemented)
@@ -27,7 +27,7 @@ public class ExpoLineSdkModule: Module {
       }
       method.call(arguments: arguments, result: result)
     }
-
+    
     AsyncFunction("logout") { (result: Promise) in
       guard let method = LineChannelMethod(rawValue: "logout") else {
         result.reject(ExpoError.methodNotImplemented)
@@ -35,7 +35,7 @@ public class ExpoLineSdkModule: Module {
       }
       method.call(arguments: nil, result: result)
     }
-
+    
     AsyncFunction("getProfile") { (result: Promise) in
       guard let method = LineChannelMethod(rawValue: "getProfile") else {
         result.reject(ExpoError.methodNotImplemented)
@@ -43,7 +43,7 @@ public class ExpoLineSdkModule: Module {
       }
       method.call(arguments: nil, result: result)
     }
-
+    
     AsyncFunction("refreshToken") { (result: Promise) in
       guard let method = LineChannelMethod(rawValue: "refreshToken") else {
         result.reject(ExpoError.methodNotImplemented)
@@ -51,7 +51,7 @@ public class ExpoLineSdkModule: Module {
       }
       method.call(arguments: nil, result: result)
     }
-
+    
     AsyncFunction("verifyAccessToken") { (result: Promise) in
       guard let method = LineChannelMethod(rawValue: "verifyAccessToken") else {
         result.reject(ExpoError.methodNotImplemented)
@@ -59,7 +59,7 @@ public class ExpoLineSdkModule: Module {
       }
       method.call(arguments: nil, result: result)
     }
-
+    
     AsyncFunction("getBotFriendshipStatus") { (result: Promise) in
       guard let method = LineChannelMethod(rawValue: "getBotFriendshipStatus") else {
         result.reject(ExpoError.methodNotImplemented)
@@ -67,7 +67,7 @@ public class ExpoLineSdkModule: Module {
       }
       method.call(arguments: nil, result: result)
     }
-
+    
     AsyncFunction("currentAccessToken") { (result: Promise) in
       guard let method = LineChannelMethod(rawValue: "currentAccessToken") else {
         result.reject(ExpoError.methodNotImplemented)
@@ -75,7 +75,7 @@ public class ExpoLineSdkModule: Module {
       }
       method.call(arguments: nil, result: result)
     }
-
+    
     // Defines constant property on the module.
     Constant("PI") {
       Double.pi
@@ -111,6 +111,48 @@ public class ExpoLineSdkModule: Module {
       Events("onLoad")
     }
   }
+}
+
+extension LineSDKError {
+  var expoError: ExpoError {
+    return ExpoError(code: String(errorCode),message: errorDescription, details: errorUserInfo)
+  }
+}
+
+public struct ExpoError: Error {
+  public let code: String
+  public let message: String?
+  public let details: Any?
+  
+  public init(code: String, message: String?, details: Any?) {
+    self.code = code
+    self.message = message
+    self.details = details
+  }
+}
+
+extension ExpoError {
+  static let nilArgument = ExpoError(
+    code: "argument.nil",
+    message: "Expect an argument when invoking function, but it is nil.", details: nil
+  )
+  
+  static func failedArgumentField<T>(_ fieldName: String, type: T.Type) -> ExpoError {
+    return .init(
+      code: "argument.failedField",
+      message: "Expect a `\(fieldName)` field with type <\(type)> in the argument, " +
+      "but it is missing or type not matched.",
+      details: fieldName)
+  }
+  
+  // In Expo module context, method dispatch is handled by AsyncFunction declarations,
+  // so this error won't occur. We add it to maintain parity with Flutter implementation
+  // and make future ports/refactors easier.
+  static let methodNotImplemented = ExpoError(
+    code: "method.notImplemented",
+    message: "The requested method is not implemented.",
+    details: nil
+  )
 }
 
 enum LineChannelMethod: String {
@@ -255,9 +297,9 @@ extension LineChannelMethod {
 }
 
 private let encoder: JSONEncoder = {
-    let encoder = JSONEncoder()
-    encoder.dateEncodingStrategy = .secondsSince1970
-    return encoder
+  let encoder = JSONEncoder()
+  encoder.dateEncodingStrategy = .secondsSince1970
+  return encoder
 }()
 
 extension Encodable {
@@ -266,47 +308,3 @@ extension Encodable {
     return String(data: data, encoding: .utf8)!
   }
 }
-
-extension LineSDKError {
-  var expoError: ExpoError {
-    return ExpoError(code: String(errorCode),message: errorDescription, details: errorUserInfo)
-  }
-}
-
-
-public struct ExpoError: Error {
-  public let code: String
-  public let message: String?
-  public let details: Any?
-  
-  public init(code: String, message: String?, details: Any?) {
-    self.code = code
-    self.message = message
-    self.details = details
-  }
-}
-
-extension ExpoError {
-  static let nilArgument = ExpoError(
-    code: "argument.nil",
-    message: "Expect an argument when invoking function, but it is nil.", details: nil
-  )
-
-  static func failedArgumentField<T>(_ fieldName: String, type: T.Type) -> ExpoError {
-    return .init(
-      code: "argument.failedField",
-      message: "Expect a `\(fieldName)` field with type <\(type)> in the argument, " +
-      "but it is missing or type not matched.",
-      details: fieldName)
-  }
-
-  // In Expo module context, method dispatch is handled by AsyncFunction declarations,
-  // so this error won't occur. We add it to maintain parity with Flutter implementation
-  // and make future ports/refactors easier.
-  static let methodNotImplemented = ExpoError(
-    code: "method.notImplemented",
-    message: "The requested method is not implemented.",
-    details: nil
-  )
-}
-
