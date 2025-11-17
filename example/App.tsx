@@ -40,7 +40,7 @@ export default function App() {
       name: 'Setup',
       run: async () => {
         try {
-          await ExpoLineSdk.setup({ channelId: '2006633855' });
+          await ExpoLineSdk.instance.setup({ channelId: '2006633855' });
           setState({ success: true }, null);
         } catch (e: any) {
           console.log(e);
@@ -52,7 +52,10 @@ export default function App() {
       name: 'Login',
       run: async () => {
         try {
-          const result = await ExpoLineSdk.login({ scopes: ['profile', 'openid', 'email'] });
+          const result = await ExpoLineSdk.instance.login({
+            scopes: ['profile', 'openid', 'email'],
+          });
+          console.log(result);
           setState(result, null);
         } catch (e: any) {
           console.log(e);
@@ -64,7 +67,7 @@ export default function App() {
       name: 'Logout',
       run: async () => {
         try {
-          await ExpoLineSdk.logout();
+          await ExpoLineSdk.instance.logout();
           setState({ success: true }, null);
         } catch (e: any) {
           console.log(e);
@@ -76,7 +79,7 @@ export default function App() {
       name: 'Get Profile',
       run: async () => {
         try {
-          const result = await ExpoLineSdk.getProfile();
+          const result = await ExpoLineSdk.instance.getProfile();
           setState(result, null);
         } catch (e: any) {
           console.log(e);
@@ -88,7 +91,7 @@ export default function App() {
       name: 'Get Current AccessToken',
       run: async () => {
         try {
-          const result = await ExpoLineSdk.getCurrentAccessToken();
+          const result = await ExpoLineSdk.instance.getCurrentAccessToken();
           setState(result, null);
         } catch (e: any) {
           console.log(e);
@@ -100,7 +103,7 @@ export default function App() {
       name: 'Refresh Token',
       run: async () => {
         try {
-          const result = await ExpoLineSdk.refreshToken();
+          const result = await ExpoLineSdk.instance.refreshToken();
           setState(result, null);
         } catch (e: any) {
           console.log(e);
@@ -112,7 +115,7 @@ export default function App() {
       name: 'Verify Access Token',
       run: async () => {
         try {
-          const result = await ExpoLineSdk.verifyAccessToken();
+          const result = await ExpoLineSdk.instance.verifyAccessToken();
           setState(result, null);
         } catch (e: any) {
           console.log(e);
@@ -124,7 +127,7 @@ export default function App() {
       name: 'Official Account Friendship Status',
       run: async () => {
         try {
-          const result = await ExpoLineSdk.getBotFriendshipStatus();
+          const result = await ExpoLineSdk.instance.getBotFriendshipStatus();
           setState(result, null);
         } catch (e: any) {
           console.log(e);
