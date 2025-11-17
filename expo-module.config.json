@@ -1,7 +1,8 @@
 {
   "platforms": ["apple", "android", "web"],
   "apple": {
-    "modules": ["ExpoLineSdkModule"]
+    "modules": ["ExpoLineSdkModule"],
+    "appDelegateSubscribers": ["ExpoLineSdkAppDelegate"]
   },
   "android": {
     "modules": ["xyz.wodeapp.expo.linesdk.ExpoLineSdkModule"]
