@@ -1,14 +1,6 @@
-import { useState } from 'react';
 import ExpoLineSdk from 'expo-line-sdk';
-import {
-  Button,
-  SafeAreaView,
-  ScrollView,
-  Text,
-  View,
-  TouchableOpacity,
-  StyleSheet,
-} from 'react-native';
+import { useState } from 'react';
+import { SafeAreaView, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 type APIItem = {
   name: string;
@@ -153,8 +145,7 @@ export default function App() {
             key={index}
             style={styles.apiItem}
             onPress={api.run}
-            activeOpacity={0.7}
-          >
+            activeOpacity={0.7}>
             <Text style={styles.apiItemText}>{api.name}</Text>
           </TouchableOpacity>
         ))}
