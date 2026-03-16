@@ -32,7 +32,9 @@ export default function App() {
       name: 'Setup',
       run: async () => {
         try {
-          await ExpoLineSdk.instance.setup({ channelId: process.env.LINE_CHANNEL_ID });
+          const channelId = process.env.EXPO_PUBLIC_LINE_CHANNEL_ID;
+          if (!channelId) throw new Error('LINE_CHANNEL_ID is not set');
+          await ExpoLineSdk.instance.setup({ channelId });
           setState({ success: true }, null);
         } catch (e: any) {
           console.log(e);
