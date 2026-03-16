@@ -40,7 +40,7 @@ export default function App() {
       name: 'Setup',
       run: async () => {
         try {
-          await ExpoLineSdk.instance.setup({ channelId: '2006633855' });
+          await ExpoLineSdk.instance.setup({ channelId: process.env.LINE_CHANNEL_ID });
           setState({ success: true }, null);
         } catch (e: any) {
           console.log(e);
