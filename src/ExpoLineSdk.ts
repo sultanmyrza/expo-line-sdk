@@ -107,7 +107,7 @@ class ExpoLineSDK {
   async login(params?: LoginParams): Promise<LoginResult> {
     const loginParams: LoginParams = {
       scopes: params?.scopes ?? ['profile'],
-      option: params?.option,
+      option: params?.option ?? {},
     };
     return await ExpoLineSdkModule.login(loginParams).then(
       (value: any) => new LoginResult(this._decodeJson(value))
