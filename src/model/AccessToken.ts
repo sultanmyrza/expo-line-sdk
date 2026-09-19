@@ -133,7 +133,7 @@ export class AccessToken {
    * header. Fixed to Bearer for now.
    */
   get tokenType(): string {
-    return this._data["token_type"];
+    return this._data["token_type"] ?? "Bearer";
   }
 
   /**
