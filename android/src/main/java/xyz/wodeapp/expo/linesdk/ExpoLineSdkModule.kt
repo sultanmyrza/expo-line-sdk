@@ -8,7 +8,6 @@ import kotlin.text.orEmpty
 
 class ExpoLineSdkModule : Module() {
     companion object {
-        // Shared instance so lifecycle listener can access it
         val lineSdkWrapper = LineSdkWrapper()
         private const val DEFAULT_ACTIVITY_RESULT_REQUEST_CODE = 8192
     }
@@ -82,6 +81,14 @@ class ExpoLineSdkModule : Module() {
 
     override fun definition() = ModuleDefinition {
         Name("ExpoLineSdk")
+
+        OnActivityResult { _, payload ->
+            lineSdkWrapper.handleActivityResult(
+                payload.requestCode,
+                payload.resultCode,
+                payload.data
+            )
+        }
 
         AsyncFunction("toBeta") { argument: Map<String, Any>?, result: Promise ->
             onMethodCall(MethodCall("toBeta", argument), result)
