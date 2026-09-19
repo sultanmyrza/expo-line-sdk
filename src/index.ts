@@ -2,4 +2,12 @@
 // and on native platforms to ExpoLineSdkModule.ts
 export { default } from "./ExpoLineSdk";
 export { default as ExpoLineSdkView } from "./ExpoLineSdkView";
-export * from "./ExpoLineSdk.types";
+export * from "./model";
+export type {
+  SetupParams,
+  LoginParams,
+  ExpoLineSdkViewProps,
+  OnLoadEventPayload,
+  ChangeEventPayload,
+  ExpoLineSdkModuleEvents,
+} from "./ExpoLineSdk.types";

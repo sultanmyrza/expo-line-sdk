@@ -3,14 +3,16 @@ import { registerWebModule, NativeModule } from "expo";
 import {
   ExpoLineSdkModuleEvents,
   LoginParams,
-  LoginResult,
-  StoredAccessToken,
-  UserProfile,
+  SetupParams,
+} from "./ExpoLineSdk.types";
+import {
   AccessToken,
   AccessTokenVerifyResult,
   BotFriendshipStatus,
-  SetupParams,
-} from "./ExpoLineSdk.types";
+  LoginResult,
+  StoredAccessToken,
+  UserProfile,
+} from "./model";
 
 class ExpoLineSdkModule extends NativeModule<ExpoLineSdkModuleEvents> {
   async setup(params: SetupParams): Promise<void> {
