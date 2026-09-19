@@ -43,7 +43,6 @@ export class BotFriendshipStatus {
    * false if the LINE Official Account isn't a friend of the user or the user has blocked it.
    */
   get isFriend(): boolean {
-    return this._data['friendFlag'];
+    return this._data["friendFlag"];
   }
 }
-

@@ -19,11 +19,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import {
-  LoginParams,
-  SetupParams,
-} from './ExpoLineSdk.types';
-
+import { LoginParams, SetupParams } from "./ExpoLineSdk.types";
+import ExpoLineSdkModule from "./ExpoLineSdkModule";
 import {
   LoginResult,
   StoredAccessToken,
@@ -31,9 +28,7 @@ import {
   AccessToken,
   AccessTokenVerifyResult,
   BotFriendshipStatus,
-} from './model';
-
-import ExpoLineSdkModule from './ExpoLineSdkModule';
+} from "./model";
 
 /**
  * A general manager class for LINE SDK login features.
@@ -106,11 +101,11 @@ class ExpoLineSDK {
    */
   async login(params?: LoginParams): Promise<LoginResult> {
     const loginParams: LoginParams = {
-      scopes: params?.scopes ?? ['profile'],
+      scopes: params?.scopes ?? ["profile"],
       option: params?.option ?? {},
     };
     return await ExpoLineSdkModule.login(loginParams).then(
-      (value: any) => new LoginResult(this._decodeJson(value))
+      (value: any) => new LoginResult(this._decodeJson(value)),
     );
   }
 
@@ -144,7 +139,7 @@ class ExpoLineSDK {
    */
   async getProfile(): Promise<UserProfile> {
     return await ExpoLineSdkModule.getProfile().then(
-      (value: any) => new UserProfile(this._decodeJson(value))
+      (value: any) => new UserProfile(this._decodeJson(value)),
     );
   }
 
@@ -160,7 +155,7 @@ class ExpoLineSDK {
    */
   async refreshToken(): Promise<AccessToken> {
     return await ExpoLineSdkModule.refreshToken().then(
-      (value: any) => new AccessToken(this._decodeJson(value))
+      (value: any) => new AccessToken(this._decodeJson(value)),
     );
   }
 
@@ -169,7 +164,7 @@ class ExpoLineSDK {
    */
   async verifyAccessToken(): Promise<AccessTokenVerifyResult> {
     return await ExpoLineSdkModule.verifyAccessToken().then(
-      (value: any) => new AccessTokenVerifyResult(this._decodeJson(value))
+      (value: any) => new AccessTokenVerifyResult(this._decodeJson(value)),
     );
   }
 
@@ -181,7 +176,7 @@ class ExpoLineSDK {
    */
   async getBotFriendshipStatus(): Promise<BotFriendshipStatus> {
     return await ExpoLineSdkModule.getBotFriendshipStatus().then(
-      (value: any) => new BotFriendshipStatus(this._decodeJson(value))
+      (value: any) => new BotFriendshipStatus(this._decodeJson(value)),
     );
   }
 
@@ -191,7 +186,7 @@ class ExpoLineSDK {
    */
   private _decodeJson(source: any): any {
     if (source != null) {
-      if (typeof source === 'string') {
+      if (typeof source === "string") {
         return JSON.parse(source);
       } else {
         // Already an object, return as-is

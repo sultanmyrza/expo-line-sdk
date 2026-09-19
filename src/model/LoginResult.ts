@@ -19,8 +19,8 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-import { AccessToken } from './AccessToken';
-import { UserProfile } from './UserProfile';
+import { AccessToken } from "./AccessToken";
+import { UserProfile } from "./UserProfile";
 
 /**
  * The result of a successful login, containing basic user information and an access token.
@@ -32,8 +32,8 @@ export class LoginResult {
 
   constructor(data: Record<string, any>) {
     this._data = data;
-    this._accessToken = new AccessToken(data['accessToken'] || {});
-    const userData = data['userProfile'];
+    this._accessToken = new AccessToken(data["accessToken"] || {});
+    const userData = data["userProfile"];
     if (userData == null) {
       this._userProfile = null;
     } else {
@@ -59,8 +59,8 @@ export class LoginResult {
    * The valid scopes bound to this login result.
    */
   get scopes(): string[] {
-    const scope = this._data['scope'] || '';
-    return scope ? scope.split(' ') : [];
+    const scope = this._data["scope"] || "";
+    return scope ? scope.split(" ") : [];
   }
 
   /**
@@ -82,7 +82,7 @@ export class LoginResult {
    * [Linking a LINE official account with your LINE Login channel](https://developers.line.me/en/docs/line-login/web/link-a-bot/).
    */
   get isFriendshipStatusChanged(): boolean | null {
-    return this._data['friendshipStatusChanged'] ?? null;
+    return this._data["friendshipStatusChanged"] ?? null;
   }
 
   /**
@@ -90,7 +90,6 @@ export class LoginResult {
    * verify the ID Token against the LINE server. This value is null if openid permission is not requested.
    */
   get idTokenNonce(): string | null {
-    return this._data['IDTokenNonce'] || null;
+    return this._data["IDTokenNonce"] || null;
   }
 }
-

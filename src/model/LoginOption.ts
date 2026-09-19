@@ -64,12 +64,12 @@ export class LoginOption {
     options?: {
       requestCode?: number;
       idTokenNonce?: string;
-    }
+    },
   ) {
     this.onlyWebLogin = onlyWebLogin;
     this.botPrompt = botPrompt;
-    this.requestCode = options?.requestCode ?? LoginOption.DEFAULT_ACTIVITY_RESULT_REQUEST_CODE;
+    this.requestCode =
+      options?.requestCode ?? LoginOption.DEFAULT_ACTIVITY_RESULT_REQUEST_CODE;
     this.idTokenNonce = options?.idTokenNonce;
   }
 }
-

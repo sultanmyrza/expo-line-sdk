@@ -1,6 +1,6 @@
-import * as React from 'react';
+import * as React from "react";
 
-import { ExpoLineSdkViewProps } from './ExpoLineSdk.types';
+import { ExpoLineSdkViewProps } from "./ExpoLineSdk.types";
 
 export default function ExpoLineSdkView(props: ExpoLineSdkViewProps) {
   return (

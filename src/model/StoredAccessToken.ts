@@ -40,7 +40,7 @@ export class StoredAccessToken {
    * The access token, as a string.
    */
   get value(): string {
-    return this._data['access_token'];
+    return this._data["access_token"];
   }
 
   /**
@@ -50,7 +50,6 @@ export class StoredAccessToken {
    * LineSDK.verifyAccessToken().
    */
   get expiresIn(): number {
-    return this._data['expires_in'];
+    return this._data["expires_in"];
   }
 }
-

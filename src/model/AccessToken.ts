@@ -57,7 +57,7 @@ export class AccessToken {
    * The value of the access token.
    */
   get value(): string {
-    return this._data['access_token'];
+    return this._data["access_token"];
   }
 
   /**
@@ -65,7 +65,7 @@ export class AccessToken {
    * counting from when the server issued the token.
    */
   get expiresIn(): number {
-    return this._data['expires_in'];
+    return this._data["expires_in"];
   }
 
   /**
@@ -77,7 +77,7 @@ export class AccessToken {
    * permission. Otherwise, null is returned.
    */
   get idTokenRaw(): string | null {
-    return this._data['id_token'] || null;
+    return this._data["id_token"] || null;
   }
 
   /**
@@ -100,7 +100,7 @@ export class AccessToken {
       return null;
     }
 
-    const parts = this.idTokenRaw.split('.');
+    const parts = this.idTokenRaw.split(".");
     // Malformed JWT format.
     if (parts.length !== 3) {
       this._idToken = null;
@@ -124,8 +124,8 @@ export class AccessToken {
    * The valid scopes bound to this access token.
    */
   get scopes(): string[] {
-    const scope = this._data['scope'] || '';
-    return scope ? scope.split(' ') : [];
+    const scope = this._data["scope"] || "";
+    return scope ? scope.split(" ") : [];
   }
 
   /**
@@ -133,7 +133,7 @@ export class AccessToken {
    * header. Fixed to Bearer for now.
    */
   get tokenType(): string {
-    return this._data['token_type'];
+    return this._data["token_type"];
   }
 
   /**
@@ -146,7 +146,7 @@ export class AccessToken {
    * null is returned.
    */
   get email(): string | null {
-    return this.idToken?.['email'] || null;
+    return this.idToken?.["email"] || null;
   }
 
   /**
@@ -154,10 +154,10 @@ export class AccessToken {
    * Replaces URL-safe characters and adds padding if needed.
    */
   private base64UrlNormalize(base64Url: string): string {
-    let normalized = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+    let normalized = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     // Add padding if needed
     while (normalized.length % 4) {
-      normalized += '=';
+      normalized += "=";
     }
     return normalized;
   }
@@ -178,8 +178,7 @@ export class AccessToken {
       return new TextDecoder().decode(bytes);
     } catch (error) {
       // Fallback for environments without atob
-      throw new Error('Failed to decode base64 string');
+      throw new Error("Failed to decode base64 string");
     }
   }
 }
-

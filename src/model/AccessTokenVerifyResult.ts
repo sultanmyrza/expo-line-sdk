@@ -40,15 +40,15 @@ export class AccessTokenVerifyResult {
    * The channel ID bound to the access token.
    */
   get channelId(): string {
-    return this._data['client_id'];
+    return this._data["client_id"];
   }
 
   /**
    * The valid scopes bound to this access token.
    */
   get scopes(): string[] {
-    const scope = this._data['scope'] || '';
-    return scope ? scope.split(' ') : [];
+    const scope = this._data["scope"] || "";
+    return scope ? scope.split(" ") : [];
   }
 
   /**
@@ -56,7 +56,6 @@ export class AccessTokenVerifyResult {
    * Counting from when the server received the request.
    */
   get expiresIn(): number {
-    return this._data['expires_in'];
+    return this._data["expires_in"];
   }
 }
-

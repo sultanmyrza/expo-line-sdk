@@ -40,14 +40,14 @@ export class UserProfile {
    * The display name of the current authorized user.
    */
   get displayName(): string {
-    return this._data['displayName'];
+    return this._data["displayName"];
   }
 
   /**
    * The user ID of the current authorized user.
    */
   get userId(): string {
-    return this._data['userId'];
+    return this._data["userId"];
   }
 
   /**
@@ -56,7 +56,7 @@ export class UserProfile {
    * Empty or null if the user hasn't set a status message.
    */
   get statusMessage(): string | null {
-    return this._data['statusMessage'] || null;
+    return this._data["statusMessage"] || null;
   }
 
   /**
@@ -65,7 +65,7 @@ export class UserProfile {
    * Empty or null if the user hasn't set a profile image.
    */
   get pictureUrl(): string | null {
-    return this._data['pictureUrl'] || null;
+    return this._data["pictureUrl"] || null;
   }
 
   /**
@@ -75,7 +75,7 @@ export class UserProfile {
    */
   get pictureUrlLarge(): string | null {
     const url = this.pictureUrl;
-    if (url && url !== '') {
+    if (url && url !== "") {
       return `${url}/large`;
     }
     return null;
@@ -88,10 +88,9 @@ export class UserProfile {
    */
   get pictureUrlSmall(): string | null {
     const url = this.pictureUrl;
-    if (url && url !== '') {
+    if (url && url !== "") {
       return `${url}/small`;
     }
     return null;
   }
 }
-

@@ -1,12 +1,11 @@
-import type { StyleProp, ViewStyle } from 'react-native';
+import type { StyleProp, ViewStyle } from "react-native";
 
 export type OnLoadEventPayload = {
   url: string;
 };
 
-export type ExpoLineSdkModuleEvents = {
-  // LINE SDK doesn't use events, but keeping empty interface for compatibility
-};
+// LINE SDK doesn't use events; keep an empty event map for NativeModule typing.
+export type ExpoLineSdkModuleEvents = Record<string, never>;
 
 export type ChangeEventPayload = {
   value: string;

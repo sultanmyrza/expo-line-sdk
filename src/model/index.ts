@@ -19,11 +19,10 @@
 //  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-export { AccessToken } from './AccessToken';
-export { StoredAccessToken } from './StoredAccessToken';
-export { UserProfile } from './UserProfile';
-export { LoginResult } from './LoginResult';
-export { LoginOption } from './LoginOption';
-export { AccessTokenVerifyResult } from './AccessTokenVerifyResult';
-export { BotFriendshipStatus } from './BotFriendshipStatus';
-
+export { AccessToken } from "./AccessToken";
+export { StoredAccessToken } from "./StoredAccessToken";
+export { UserProfile } from "./UserProfile";
+export { LoginResult } from "./LoginResult";
+export { LoginOption } from "./LoginOption";
+export { AccessTokenVerifyResult } from "./AccessTokenVerifyResult";
+export { BotFriendshipStatus } from "./BotFriendshipStatus";
