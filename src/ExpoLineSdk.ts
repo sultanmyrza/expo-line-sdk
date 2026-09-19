@@ -100,13 +100,14 @@ class ExpoLineSDK {
    * (Android).
    */
   async login(params?: LoginParams): Promise<LoginResult> {
-    const loginParams: LoginParams = {
+    const option = params?.option;
+    return await ExpoLineSdkModule.login({
+      loginRequestCode: option?.requestCode,
       scopes: params?.scopes ?? ["profile"],
-      option: params?.option ?? {},
-    };
-    return await ExpoLineSdkModule.login(loginParams).then(
-      (value: any) => new LoginResult(this._decodeJson(value)),
-    );
+      onlyWebLogin: option?.onlyWebLogin,
+      botPrompt: option?.botPrompt,
+      idTokenNonce: option?.idTokenNonce,
+    }).then((value: any) => new LoginResult(this._decodeJson(value)));
   }
 
   /**
