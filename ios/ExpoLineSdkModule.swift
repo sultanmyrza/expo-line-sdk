@@ -12,6 +12,14 @@ public class ExpoLineSdkModule: Module {
     // The module will be accessible from `requireNativeModule('ExpoLineSdk')` in JavaScript.
     Name("ExpoLineSdk")
     
+    AsyncFunction("toBeta") { (arguments: [String: Any]?, result: Promise) in
+      guard let method = LineChannelMethod(rawValue: "toBeta") else {
+        result.reject(ExpoError.methodNotImplemented)
+        return
+      }
+      method.call(arguments: arguments, result: result)
+    }
+
     AsyncFunction("setup") { (arguments: [String: Any]?, result: Promise) in
       guard let method = LineChannelMethod(rawValue: "setup") else {
         result.reject(ExpoError.methodNotImplemented)
@@ -164,6 +172,7 @@ enum LineChannelMethod: String {
   case verifyAccessToken
   case getBotFriendshipStatus
   case currentAccessToken
+  case toBeta
   
   func call(arguments: [String: Any]?, result: Promise) {
     
@@ -182,6 +191,7 @@ enum LineChannelMethod: String {
     case .verifyAccessToken:      runner = verifyAccessToken
     case .getBotFriendshipStatus: runner = getBotFriendshipStatus
     case .currentAccessToken:     runner = currentAccessToken
+    case .toBeta:                 runner = toBeta
     }
     
     runner(arguments, result)
@@ -293,6 +303,15 @@ extension LineChannelMethod {
   
   func currentAccessToken(arguments: [String: Any]?, result: Promise) {
     result.resolve(AccessTokenStore.shared.current?.json)
+  }
+
+  func toBeta(arguments: [String: Any]?, result: Promise) {
+    // LineSDK.Constant.toBeta() is LINE_SDK_INTERNAL; Flutter exposes it only when
+    // LINE_FLUTTER_BETA_ENV_COMPATIBLE is set so the call is not left broken in production.
+    #if LINE_FLUTTER_BETA_ENV_COMPATIBLE
+    LineSDK.Constant.toBeta()
+    #endif
+    result.resolve(nil)
   }
 }
 
