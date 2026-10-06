@@ -42,7 +42,7 @@ class ExpoLineSdkModule : Module() {
                     val isWebLogin = call.argument<Boolean>("onlyWebLogin") ?: false
                     val botPrompt = call.argument<String>("botPrompt") ?: "normal"
                     val idTokenNonce = call.argument<String>("idTokenNonce")
-                    val loginRequestCode = call.argument<Int>("loginRequestCode")
+                    val loginRequestCode = call.argument<Number>("loginRequestCode")?.toInt()
                         ?: DEFAULT_ACTIVITY_RESULT_REQUEST_CODE
                     lineSdkWrapper.login(
                         loginRequestCode,
@@ -90,15 +90,15 @@ class ExpoLineSdkModule : Module() {
             )
         }
 
-        AsyncFunction("toBeta") { argument: Map<String, Any>?, result: Promise ->
+        AsyncFunction("toBeta") { argument: Map<String, Any?>?, result: Promise ->
             onMethodCall(MethodCall("toBeta", argument), result)
         }
 
-        AsyncFunction("setup") { argument: Map<String, Any>?, result: Promise ->
+        AsyncFunction("setup") { argument: Map<String, Any?>?, result: Promise ->
             onMethodCall(MethodCall("setup", argument), result)
         }
 
-        AsyncFunction("login") { argument: Map<String, Any>?, result: Promise ->
+        AsyncFunction("login") { argument: Map<String, Any?>?, result: Promise ->
             onMethodCall(MethodCall("login", argument), result)
         }
 
@@ -129,7 +129,7 @@ class ExpoLineSdkModule : Module() {
 }
 
 // Mimics Flutter's MethodCall interface
-private class MethodCall(val method: String, private val arguments: Map<String, Any>?) {
+private class MethodCall(val method: String, private val arguments: Map<String, Any?>?) {
     @Suppress("UNCHECKED_CAST")
     fun <T> argument(key: String): T? {
         return arguments?.get(key) as? T
