@@ -1,4 +1,4 @@
-import type { LoginOption } from "./model/LoginOption";
+import type { LoginOption } from './model/LoginOption';
 
 // LINE SDK doesn't use events; keep an empty event map for NativeModule typing.
 export type ExpoLineSdkModuleEvents = Record<string, never>;
