@@ -8,6 +8,7 @@
     "userInterfaceStyle": "light",
     "ios": {
       "supportsTablet": true,
+      "appleTeamId": "B864A438ZP",
       "bundleIdentifier": "xyz.wodeapp.expo.linesdk.example",
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
