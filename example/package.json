@@ -2,6 +2,16 @@
   "name": "expo-line-sdk-example",
   "version": "1.0.0",
   "main": "index.ts",
+  "dependencies": {
+    "expo": "~57.0.26",
+    "expo-dev-client": "~57.0.19",
+    "react": "19.2.3",
+    "react-native": "0.86.3"
+  },
+  "devDependencies": {
+    "@types/react": "~19.2.2",
+    "typescript": "~6.0.3"
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo run:android",
@@ -12,16 +22,6 @@
     "eas:build:production:ios": "eas build --local -e production -p ios --output ./builds/build-production-$(date +%s).ipa",
     "eas:build:production:android": "eas build --local -e production -p android --output ./builds/build-production-$(date +%s).aab",
     "eas:clean:local:artifacts": "rm -f builds/build-*.{apk,aab,ipa}"
-  },
-  "dependencies": {
-    "expo": "~54.0.23",
-    "expo-dev-client": "~6.0.17",
-    "react": "19.1.0",
-    "react-native": "0.81.5"
-  },
-  "devDependencies": {
-    "@types/react": "~19.1.0",
-    "typescript": "~5.9.2"
   },
   "private": true,
   "expo": {
