@@ -1,7 +1,7 @@
 import { registerRootComponent } from 'expo';
 import ExpoLineSdk from 'expo-line-sdk';
 
-import App from './App';
+import App from './src/App';
 
 const channelId = process.env.EXPO_PUBLIC_LINE_CHANNEL_ID;
 if (!channelId) {

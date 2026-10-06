@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import APIPage from './screen/APIPage';
 import HomePage from './screen/HomePage';
@@ -9,11 +9,20 @@ import { accentColor, textColor } from './theme';
 type Tab = 'user' | 'api';
 
 export default function App() {
+  return (
+    <SafeAreaProvider>
+      <AppContent />
+    </SafeAreaProvider>
+  );
+}
+
+function AppContent() {
   const [tab, setTab] = useState<Tab>('user');
+  const insets = useSafeAreaInsets();
 
   return (
-    <SafeAreaView style={styles.root}>
-      <View style={styles.appBar}>
+    <View style={styles.root}>
+      <View style={[styles.appBar, { paddingTop: insets.top }]}>
         <Text style={styles.title}>LINE SDK</Text>
         <View style={styles.tabs}>
           <TouchableOpacity
@@ -36,7 +45,7 @@ export default function App() {
       <View style={[styles.page, tab !== 'api' && styles.hidden]}>
         <APIPage />
       </View>
-    </SafeAreaView>
+    </View>
   );
 }
 
