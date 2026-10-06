@@ -18,8 +18,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import xyz.wodeapp.expo.linesdk.api.LineApiClientFactory
-import xyz.wodeapp.expo.linesdk.auth.LineAuthenticationConfigFactory
+import com.linecorp.linesdk.api.LineApiClientFactory
+import com.linecorp.linesdk.auth.LineAuthenticationConfigFactory
 import xyz.wodeapp.expo.linesdk.model.AccessToken
 import xyz.wodeapp.expo.linesdk.model.BotFriendshipStatus
 import xyz.wodeapp.expo.linesdk.model.LoginResultForFlutter

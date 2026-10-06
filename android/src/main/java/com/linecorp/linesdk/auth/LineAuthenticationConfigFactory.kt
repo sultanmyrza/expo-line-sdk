@@ -1,7 +1,6 @@
-package xyz.wodeapp.expo.linesdk.auth
+package com.linecorp.linesdk.auth
 
 import android.net.Uri
-import com.linecorp.linesdk.auth.LineAuthenticationConfig
 
 object LineAuthenticationConfigFactory {
     fun createConfig(

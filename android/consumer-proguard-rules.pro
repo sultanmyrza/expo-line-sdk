@@ -16,3 +16,7 @@
 -keepclassmembers class * {
   @com.google.gson.annotations.SerializedName <fields>;
 }
+
+# LINE SDK factories placed in LINE packages for package-private builder access (mirrors flutter_line_sdk)
+-keep class com.linecorp.linesdk.auth.LineAuthenticationConfigFactory { *; }
+-keep class com.linecorp.linesdk.api.LineApiClientFactory { *; }

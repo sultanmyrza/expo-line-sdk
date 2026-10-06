@@ -1,9 +1,7 @@
-package xyz.wodeapp.expo.linesdk.api
+package com.linecorp.linesdk.api
 
 import android.content.Context
 import android.net.Uri
-import com.linecorp.linesdk.api.LineApiClient
-import com.linecorp.linesdk.api.LineApiClientBuilder
 
 object LineApiClientFactory {
     fun createLineApiClient(
