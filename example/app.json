@@ -26,7 +26,10 @@
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": ["../app.plugin.js"],
+    "plugins": [
+      "../app.plugin.js",
+      ["expo-build-properties", { "ios": { "enableSceneSupport": true } }]
+    ],
     "extra": {
       "eas": {
         "projectId": "fdc9894f-dc8b-47d4-a8a3-3889206f78c5"
